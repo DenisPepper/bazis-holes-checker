@@ -1,5 +1,5 @@
 const input = document.querySelector('#bazis-xml');
-const bodyElement = document.querySelector('body');
+const bodyElement = document.querySelector('#map');
 const messageTamplate = document
   .querySelector('#error')
   .content.querySelector('.error');
@@ -50,6 +50,11 @@ const getXML = (src) => {
       readXMLDOM(xmlDOM);
     })
     .catch((err) => console.log(err));
+};
+
+const clearAllMeesages = () => {
+  const messages = [...document.querySelectorAll('div')];
+  messages.forEach((message) => bodyElement.remove(message));
 };
 
 const whenInput = (evt) => {
