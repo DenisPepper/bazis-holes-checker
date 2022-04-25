@@ -1,5 +1,5 @@
 const input = document.querySelector('#bazis-xml');
-const errorElement = document.querySelector('#map');
+const errorElement = document.querySelector('#error-list');
 const messageTamplate = document
   .querySelector('#error')
   .content.querySelector('.error');
@@ -12,8 +12,11 @@ const showErrorMessage = (hole, value, panel) => {
   const panelName = panel.children[1].textContent;
   const panelPosition = panel.children[13].textContent;
   message.querySelector(
-    'p'
-  ).textContent = `поз.${panelPosition}. ${panelName} : ${holeType} / d${holeDiameter} х ${holeDepth} / ${value}`;
+    'dt'
+  ).textContent = `поз.${panelPosition}. ${panelName} :`;
+  message.querySelector(
+    'dd'
+  ).textContent = `${holeType} / d${holeDiameter} х ${holeDepth} / ${value}`;
   errorElement.appendChild(message);
 };
 
@@ -53,7 +56,7 @@ const getXML = (src) => {
 };
 
 const clearAllMeesages = () => {
-  const messages = [...document.querySelectorAll('div')];
+  const messages = [...document.querySelectorAll('dl')];
   messages.forEach((message) => message.remove(message));
 };
 

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <link
       rel="icon"
       href="https://example.com/favicon.ico"
@@ -11,15 +12,15 @@
     <title>Поиск отверстий с одинаковыми координатами</title>
   </head>
   <body>
-    <fieldset id="map">
+    <fieldset id="error-list">
       <legend>Поиск отверстий с одинаковыми координатами</legend>
       <input type="file" name="bazis-xml" id="bazis-xml" accept="text/xml" />
     </fieldset>
     <template id="error">
-      <div class="error">
-        <h4>координаты отверстия повторяются:</h4>
-        <p class="error__message">Ошибка!</p>
-      </div>
+      <dl class="error">
+        <dt>панель</dt>
+        <dd>отверстие</dd>
+      </dl>
     </template>
     <script src="js/main.js" type="module"></script>
   </body>
