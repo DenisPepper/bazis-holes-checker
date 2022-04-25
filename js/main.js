@@ -1,10 +1,10 @@
 const input = document.querySelector('#bazis-xml');
-const bodyElement = document.querySelector('#map');
+const errorElement = document.querySelector('#map');
 const messageTamplate = document
   .querySelector('#error')
   .content.querySelector('.error');
 
-const showErrorMessage = (hole, panel) => {
+const showErrorMessage = (hole, value, panel) => {
   const message = messageTamplate.cloneNode(true);
   const holeDiameter = hole.children[3].textContent;
   const holeType = hole.children[4].textContent;
@@ -13,16 +13,16 @@ const showErrorMessage = (hole, panel) => {
   const panelPosition = panel.children[13].textContent;
   message.querySelector(
     'p'
-  ).textContent = `${panelPosition}. ${panelName} : ${holeType}, ${holeDiameter} х ${holeDepth}`;
-  bodyElement.appendChild(message);
+  ).textContent = `поз.${panelPosition}. ${panelName} : ${holeType} / d${holeDiameter} х ${holeDepth} / ${value}`;
+  errorElement.appendChild(message);
 };
 
 const checkHoles = (holes, panel) => {
   const values = new Set();
   holes.forEach((hole) => {
-    const value = hole.children[0].textContent + hole.children[1].textContent;
+    const value = `x: ${hole.children[0].textContent}, y: ${hole.children[1].textContent}`;
     if (values.has(value)) {
-      showErrorMessage(hole, panel);
+      showErrorMessage(hole, value, panel);
     } else {
       values.add(value);
     }
@@ -54,10 +54,11 @@ const getXML = (src) => {
 
 const clearAllMeesages = () => {
   const messages = [...document.querySelectorAll('div')];
-  messages.forEach((message) => bodyElement.remove(message));
+  messages.forEach((message) => message.remove(message));
 };
 
 const whenInput = (evt) => {
+  clearAllMeesages();
   const file = evt.target.files[0];
   const fileName = file.name.toLowerCase();
   if (fileName.endsWith('xml')) {
